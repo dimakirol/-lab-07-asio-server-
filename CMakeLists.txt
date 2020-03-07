@@ -11,9 +11,6 @@ string(APPEND CMAKE_CXX_FLAGS " -g -Wall -DBOOST_LOG_DYN_LINK")
 set(D_LIBRARY_PATH="/home/kirill/Documents//boost/installed/lib/")
 
 project(7_lab)
-string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
-string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
-string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 find_package(Boost 1.72.0 COMPONENTS REQUIRED thread log log_setup)
 

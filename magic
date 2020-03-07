@@ -1,0 +1,3 @@
+Real magic if do curl like 
+                          curl -T login.txt 127.0.0.1:2001
+and take login.txt from this repository

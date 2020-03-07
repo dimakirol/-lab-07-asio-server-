@@ -23,6 +23,12 @@
 //Build coverage
 BUILD_COVERAGE:BOOL=OFF
 
+//Boost asio library (debug)
+Boost_ASIO_LIBRARY_DEBUG:FILEPATH=Boost_ASIO_LIBRARY_DEBUG-NOTFOUND
+
+//Boost asio library (release)
+Boost_ASIO_LIBRARY_RELEASE:FILEPATH=Boost_ASIO_LIBRARY_RELEASE-NOTFOUND
+
 //Boost atomic library (debug)
 Boost_ATOMIC_LIBRARY_DEBUG:FILEPATH=/home/kirill/Documents/boost/installed/lib/libboost_atomic.so
 
@@ -291,6 +297,10 @@ ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Boost_ASIO_LIBRARY_DEBUG
+Boost_ASIO_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_ASIO_LIBRARY_RELEASE
+Boost_ASIO_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_ATOMIC_LIBRARY_DEBUG
 Boost_ATOMIC_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_ATOMIC_LIBRARY_RELEASE
