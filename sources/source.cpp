@@ -1,5 +1,6 @@
 #include <ctime>
 #include <vector>
+#include <thread>
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -19,6 +20,7 @@ static const uint32_t SIZE_FILE = 10*1024*1024;
 static const uint32_t Port = 2001;
 
 using namespace boost::asio;
+using std::exception;
 namespace logging = boost::log;
 
 typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
@@ -55,7 +57,7 @@ public:
     void log_init(){
         boost::log::register_simple_formatter_factory
                 <boost::log::trivial::severity_level, char>("Severity");
-        logging::add_file_log
+        /*logging::add_file_log
                 (
                         logging::keywords::file_name = "log_%N.log",
                         logging::keywords::rotation_size = SIZE_FILE,
@@ -65,7 +67,7 @@ public:
                         logging::keywords::format =
                                 "[%TimeStamp%] [%Severity%] %Message%");
 
-        logging::add_console_log(
+        */logging::add_console_log(
                 std::cout,
                 logging::keywords::format
                         = "[%TimeStamp%] [%Severity%]: %Message%");
@@ -81,50 +83,57 @@ public:
     }
     void client_session(uint32_t client_ID)
     {
+        std::mutex door;
+        door.lock();
         socket_ptr sock = client_list[client_ID]->sock();
-        while (true)
-        {
-            std::this_thread::sleep(std::chrono::milliseconds{1});
-            char data[512];
-            size_t len = sock->read_some(buffer(data));
-            std::string read_msg = data;
-            read_msg.assign(read_msg, 0, read_msg.find('\n'));
-            if (len > 0){
-                if (client_list[client_ID]->name == std::string("")) {
-                    client_list[client_ID]->name = data;
-                    std::string answer = "login_ok" + '\n';
-                    sock->write_some(buffer(answer));
-                    BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                            << client_list[client_ID]->name
-                                            << "' successfully logged in!";
-                }
-                else if (data == std::string("clients")){
-                    BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                            << client_list[client_ID]->name
-                                            << "' requested clients list.";
-                    send_clients_list(sock);
-                    client_info_list[client_ID].client_list_changed = false;
-                    client_info_list[client_ID].time_from_last_ping = 0;
-                }
-                else if (data == std::string("ping")){
-                    if (client_info_list[client_ID].client_list_changed){
-                        std::string answer = "client list changed" + '\n';
+
+        try {
+            while (true) {
+                std::this_thread::__sleep_for(std::chrono::seconds{1},
+                                              std::chrono::nanoseconds{1});
+                char data[512];
+                size_t len = sock->read_some(buffer(data));
+                std::string read_msg = data;
+                //if (read_msg.find('\n') != std::string::npos)
+                     //read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
+                if (len > 0) {
+                    if (client_list[client_ID]->name == std::string("")) {
+                        client_list[client_ID]->name = data;
+                        std::string answer = "login_ok" + '\n';
                         sock->write_some(buffer(answer));
-                        BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                     << client_list[client_ID]->name
-                                     << "' pinged and client list was changed";
-                    }
-                    else{
-                        std::string answer = "ping_ok" + '\n';
-                        sock->write_some(buffer(answer));
+                        BOOST_LOG_TRIVIAL(info) << "Client: "
+                                                << client_list[client_ID]->name.c_str()
+                                                << " successfully logged in!";
+                    } else if (read_msg == std::string("clients")) {
                         BOOST_LOG_TRIVIAL(info) << "Client: '"
                                                 << client_list[client_ID]->name
-                                                << "' successfully pinged.";
+                                                << "' requested clients list.";
+                        send_clients_list(sock);
+                        client_info_list[client_ID].client_list_changed = false;
+                        client_info_list[client_ID].time_from_last_ping = 0;
+                    } else if (read_msg == std::string("ping")) {
+                        if (client_info_list[client_ID].client_list_changed) {
+                            std::string answer = "client list changed" + '\n';
+                            sock->write_some(buffer(answer));
+                            BOOST_LOG_TRIVIAL(info) << "Client: '"
+                                                    << client_list[client_ID]->name
+                                                    << "' pinged and client list was changed";
+                        } else {
+                            std::string answer = "ping_ok" + '\n';
+                            sock->write_some(buffer(answer));
+                            BOOST_LOG_TRIVIAL(info) << "Client: '"
+                                                    << client_list[client_ID]->name
+                                                    << "' successfully pinged.";
+                        }
+                        client_info_list[client_ID].time_from_last_ping = 0;
                     }
-                    client_info_list[client_ID].time_from_last_ping = 0;
                 }
             }
         }
+        catch(exception &e){
+            BOOST_LOG_TRIVIAL(info) << e.what();
+        }
+        door.unlock();
     }
     void start(){
         log_init();
@@ -133,21 +142,27 @@ public:
         while (true)
         {
             auto client = std::make_shared<talk_to_client>(service);
-            acc.accept(client->sock());
-            boost::recursive_mutex::scoped_lock lock(mutex);
+            acc.accept(*(client->sock()));
+            mutex.lock();
             client_list.push_back(client);
-            client_info_list.push_back(client_info(false, 0));
+
+            client_info new_client;
+            new_client.client_list_changed = false;
+            new_client.time_from_last_ping = 0;
+            client_info_list.push_back(new_client);
+
             for (uint32_t i = 0; i < client_info_list.size(); ++i){
                 client_info_list[i].client_list_changed = true;
             }
-            Threads.push_back(boost::thread(boost::bind(client_session,
+            Threads.push_back(boost::thread(boost::bind(&MyServer::client_session, this,
                                                      client_list.size() - 1)));
+            mutex.unlock();
         }
     }
 
 private:
     io_service service;
-    std::vector<boost::shared_ptr<talk_to_client>> client_list;
+    std::vector<std::shared_ptr<talk_to_client>> client_list;
     std::vector<client_info> client_info_list;
     std::mutex mutex;
     std::vector<boost::thread> Threads;
