@@ -14,21 +14,26 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/log/expressions/keyword.hpp>
+
+static const uint32_t SIZE_FILE = 10*1024*1024;
 static const uint32_t Port = 2001;
+
 using namespace boost::asio;
+namespace logging = boost::log;
 
 typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
 
 class  talk_to_client{
 public:
-    explicit talk_to_client(io_service &service):_service(service){
-        socket = socket_ptr(new ip::tcp::socket(_service));
+    explicit talk_to_client(io_service &service){
+        socket = socket_ptr(new ip::tcp::socket(service));
         name = std::string("");
     }
-    ip::tcp::socket sock(){return socket;}
+    socket_ptr sock(){return socket;}
 private:
-    io_service _service;
     socket_ptr socket;
+
+public:
     std::string name;
 };
 
@@ -41,10 +46,6 @@ private:
     typedef struct _client_info client_info;
 public:
     MyServer(){
-        ip::tcp::endpoint endp( ip::tcp::v4(), Port); // listen on 2001
-        ep = endp;
-        ip::tcp::acceptor accept(service, ep);
-        acc = accept;
     }
     ~MyServer(){
         for (uint32_t i = 0; i < Threads.size(); ++i){
@@ -73,14 +74,14 @@ public:
     void send_clients_list(socket_ptr sock){
         std::string clients_names;
         for (uint32_t i = 0; i < client_list.size(); ++i){
-            clients_names += client_list[i].name + std::string(" ");
+            clients_names += client_list[i]->name + std::string(" ");
         }
         clients_names += '\n';
-        sock.write_some(buffer(clients_names));
+        sock->write_some(buffer(clients_names));
     }
     void client_session(uint32_t client_ID)
     {
-        socket_ptr sock = client_info_list[client_ID]->sock();
+        socket_ptr sock = client_list[client_ID]->sock();
         while (true)
         {
             std::this_thread::sleep(std::chrono::milliseconds{1});
@@ -89,17 +90,17 @@ public:
             std::string read_msg = data;
             read_msg.assign(read_msg, 0, read_msg.find('\n'));
             if (len > 0){
-                if (client_list[client_ID].name == std::string("")) {
-                    client_list[client_ID].name = data;
+                if (client_list[client_ID]->name == std::string("")) {
+                    client_list[client_ID]->name = data;
                     std::string answer = "login_ok" + '\n';
-                    sock.write_some(buffer(answer));
+                    sock->write_some(buffer(answer));
                     BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                            << client_list[client_ID].name
+                                            << client_list[client_ID]->name
                                             << "' successfully logged in!";
                 }
                 else if (data == std::string("clients")){
                     BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                            << client_list[client_ID].name
+                                            << client_list[client_ID]->name
                                             << "' requested clients list.";
                     send_clients_list(sock);
                     client_info_list[client_ID].client_list_changed = false;
@@ -108,16 +109,16 @@ public:
                 else if (data == std::string("ping")){
                     if (client_info_list[client_ID].client_list_changed){
                         std::string answer = "client list changed" + '\n';
-                        sock.write_some(buffer(answer));
+                        sock->write_some(buffer(answer));
                         BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                     << client_list[client_ID].name
+                                     << client_list[client_ID]->name
                                      << "' pinged and client list was changed";
                     }
                     else{
                         std::string answer = "ping_ok" + '\n';
-                        sock.write_some(buffer(answer));
+                        sock->write_some(buffer(answer));
                         BOOST_LOG_TRIVIAL(info) << "Client: '"
-                                                << client_list[client_ID].name
+                                                << client_list[client_ID]->name
                                                 << "' successfully pinged.";
                     }
                     client_info_list[client_ID].time_from_last_ping = 0;
@@ -127,10 +128,12 @@ public:
     }
     void start(){
         log_init();
+        ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
+        ip::tcp::acceptor acc(service, ep);
         while (true)
         {
             auto client = std::make_shared<talk_to_client>(service);
-            acceptor.accept(client->sock());
+            acc.accept(client->sock());
             boost::recursive_mutex::scoped_lock lock(mutex);
             client_list.push_back(client);
             client_info_list.push_back(client_info(false, 0));
@@ -144,8 +147,6 @@ public:
 
 private:
     io_service service;
-    ip::tcp::endpoint ep;
-    ip::tcp::acceptor acc;
     std::vector<boost::shared_ptr<talk_to_client>> client_list;
     std::vector<client_info> client_info_list;
     std::mutex mutex;
