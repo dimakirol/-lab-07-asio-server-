@@ -1,3 +1,0 @@
-/home/kirill/Documents/4_semestr/-lab-07-asio-server-/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kirill/Documents/4_semestr/-lab-07-asio-server-/cmake-build-debug/CMakeFiles/7_lab.dir
-/home/kirill/Documents/4_semestr/-lab-07-asio-server-/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -43,12 +43,12 @@ class MyServer{
 private:
     struct _client_info{
         bool client_list_changed;
-        uint32_t time_from_last_ping;
+        uint32_t time_last_ping;
+        bool suicide;
     };
     typedef struct _client_info client_info;
 public:
-    MyServer(){
-    }
+    MyServer(){}
     ~MyServer(){
         for (uint32_t i = 0; i < Threads.size(); ++i){
             Threads[i].join();
@@ -81,18 +81,37 @@ public:
         clients_names += '\n';
         sock->write_some(buffer(clients_names));
     }
+    void kicker(){
+        while (true){
+            std::this_thread::__sleep_for(std::chrono::seconds{1},
+                                          std::chrono::nanoseconds{0});
+            for (uint32_t i = 0; i < client_list.size(); ++i){
+                uint32_t time = clock();
+                uint32_t t = (time -
+                        client_info_list[i].time_last_ping) / CLOCKS_PER_SEC;
+                if (t > 5){
+                    client_info_list[i].suicide = true;
+                }
+            }
+        }
+    }
     void client_session(uint32_t client_ID)
     {
         std::mutex door;
         door.lock();
         socket_ptr sock = client_list[client_ID]->sock();
-
+        door.unlock();
         try {
             while (true) {
-                std::this_thread::__sleep_for(std::chrono::seconds{1},
-                                              std::chrono::nanoseconds{1});
                 char data[512];
                 size_t len = sock->read_some(buffer(data));
+
+                if (client_info_list[client_ID].suicide){
+                    client_list.erase(client_list.begin() + client_ID);
+                    client_info_list.erase(client_list.begin() + client_ID);
+                    return;
+                }
+
                 std::string read_msg = data;
                 //if (read_msg.find('\n') != std::string::npos)
                      //read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
@@ -110,10 +129,10 @@ public:
                                                 << "' requested clients list.";
                         send_clients_list(sock);
                         client_info_list[client_ID].client_list_changed = false;
-                        client_info_list[client_ID].time_from_last_ping = 0;
+                        client_info_list[client_ID].time_last_ping = clock();
                     } else if (read_msg == std::string("ping")) {
                         if (client_info_list[client_ID].client_list_changed) {
-                            std::string answer = "client list changed" + '\n';
+                            std::string answer = "client_list_changed" + '\n';
                             sock->write_some(buffer(answer));
                             BOOST_LOG_TRIVIAL(info) << "Client: '"
                                                     << client_list[client_ID]->name
@@ -125,7 +144,7 @@ public:
                                                     << client_list[client_ID]->name
                                                     << "' successfully pinged.";
                         }
-                        client_info_list[client_ID].time_from_last_ping = 0;
+                        client_info_list[client_ID].time_last_ping = clock();
                     }
                 }
             }
@@ -133,7 +152,6 @@ public:
         catch(exception &e){
             BOOST_LOG_TRIVIAL(info) << e.what();
         }
-        door.unlock();
     }
     void start(){
         log_init();
@@ -148,10 +166,12 @@ public:
 
             client_info new_client;
             new_client.client_list_changed = false;
-            new_client.time_from_last_ping = 0;
+            new_client.time_last_ping = clock();
+            new_client.suicide = false;
             client_info_list.push_back(new_client);
 
-            for (uint32_t i = 0; i < client_info_list.size(); ++i){
+            for (uint32_t i = 0; i < client_info_list.size() - 1; ++i){
+                //S P E C I A L  F O R  D I M O N!)
                 client_info_list[i].client_list_changed = true;
             }
             Threads.push_back(boost::thread(boost::bind(&MyServer::client_session, this,

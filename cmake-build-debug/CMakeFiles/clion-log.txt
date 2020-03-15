@@ -1,86 +1,23 @@
-/home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/kirill/Documents/4_semestr/-lab-07-asio-server-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
+"C:\Program Files\JetBrains\CLion 2019.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Kirill\VUZ\4_Semestr\C++\group\lab-07-asio-server
+-- The C compiler identification is GNU 4.8.1
+-- The CXX compiler identification is GNU 4.8.1
+-- Check for working C compiler: D:/Kirill/Files/mingw64/bin/gcc.exe
+-- Check for working C compiler: D:/Kirill/Files/mingw64/bin/gcc.exe -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: D:/Kirill/Files/mingw64/bin/g++.exe
+CMake Error in D:/Kirill/VUZ/4_Semestr/C++/group/lab-07-asio-server/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeLists.txt:
+  Target "cmTC_48d46" requires the language dialect "CXX17" (with compiler
+  extensions), but CMake does not know the compile flags to use to enable it.
+
+
+CMake Error at C:/Program Files/JetBrains/CLion 2019.3.4/bin/cmake/win/share/cmake-3.15/Modules/CMakeTestCXXCompiler.cmake:37 (try_compile):
+  Failed to generate test project build system.
 Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:6 (project)
 
 
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
-CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
-  New Boost version may have incorrect or missing dependencies and imported
-  targets
-Call Stack (most recent call first):
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
-  /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
-
-
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
--- Found Boost: /home/kirill/Documents/boost/installed/include (found suitable version "1.72.0", minimum required is "1.72.0") found components:  thread log log_setup chrono date_time atomic filesystem regex 
--- Configuring done
--- Generating done
--- Build files have been written to: /home/kirill/Documents/4_semestr/-lab-07-asio-server-/cmake-build-debug
+-- Configuring incomplete, errors occurred!
+See also "D:/Kirill/VUZ/4_Semestr/C++/group/lab-07-asio-server/cmake-build-debug/CMakeFiles/CMakeOutput.log".
