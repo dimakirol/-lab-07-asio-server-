@@ -108,7 +108,7 @@ public:
 
                 if (client_info_list[client_ID].suicide){
                     client_list.erase(client_list.begin() + client_ID);
-                    client_info_list.erase(client_list.begin() + client_ID);
+                    client_info_list.erase(client_info_list.begin() + client_ID);
                     return;
                 }
 
@@ -121,7 +121,7 @@ public:
                         std::string answer = "login_ok" + '\n';
                         sock->write_some(buffer(answer));
                         BOOST_LOG_TRIVIAL(info) << "Client: "
-                                                << client_list[client_ID]->name.c_str()
+                                                << client_list[client_ID]->name
                                                 << " successfully logged in!";
                     } else if (read_msg == std::string("clients")) {
                         BOOST_LOG_TRIVIAL(info) << "Client: '"
