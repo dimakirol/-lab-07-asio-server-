@@ -109,14 +109,18 @@ public:
                 size_t len = sock->read_some(buffer(data));
 
                 if (client_info_list[client_ID].suicide){
+                    BOOST_LOG_TRIVIAL(info) << "Killing session with: "
+                                            << client_list[client_ID]->name;
                     client_list.erase(client_list.begin() + client_ID);
                     client_info_list.erase(client_info_list.begin() + client_ID);
                     return;
                 }
 
                 std::string read_msg = data;
-                //if (read_msg.find('\n') != std::string::npos)
-                     //read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
+                BOOST_LOG_TRIVIAL(info) << "New message: "
+                                        << read_msg;
+                if (read_msg.find('\n') != std::string::npos)
+                     read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
                 if (len > 0) {
                     if (client_list[client_ID]->name == std::string("")) {
                         client_list[client_ID]->name = data;
@@ -125,26 +129,26 @@ public:
                         BOOST_LOG_TRIVIAL(info) << "Client: "
                                                 << client_list[client_ID]->name
                                                 << " successfully logged in!";
-                    } else if (read_msg == std::string("clients")) {
+                    } else if (read_msg.find("clients") != std::string::npos) {
                         BOOST_LOG_TRIVIAL(info) << "Client: '"
                                                 << client_list[client_ID]->name
                                                 << "' requested clients list.";
                         send_clients_list(sock);
                         client_info_list[client_ID].client_list_changed = false;
                         client_info_list[client_ID].time_last_ping = clock();
-                    } else if (read_msg == std::string("ping")) {
+                    } else if (read_msg.find("ping") != std::string::npos) {
                         if (client_info_list[client_ID].client_list_changed) {
                             std::string answer = "client_list_changed" + '\n';
                             sock->write_some(buffer(answer));
-                            BOOST_LOG_TRIVIAL(info) << "Client: '"
+                            BOOST_LOG_TRIVIAL(info) << "Client:"
                                                     << client_list[client_ID]->name
-                                                    << "' pinged and client list was changed";
+                                                    << "pinged and client list was changed";
                         } else {
                             std::string answer = "ping_ok" + '\n';
                             sock->write_some(buffer(answer));
-                            BOOST_LOG_TRIVIAL(info) << "Client: '"
+                            BOOST_LOG_TRIVIAL(info) << "Client: "
                                                     << client_list[client_ID]->name
-                                                    << "' successfully pinged.";
+                                                    << "successfully pinged.";
                         }
                         client_info_list[client_ID].time_last_ping = clock();
                     }
@@ -153,6 +157,15 @@ public:
         }
         catch(exception &e){
             BOOST_LOG_TRIVIAL(info) << e.what();
+            if (e.what() == std::string("read_some: End of file")){
+                BOOST_LOG_TRIVIAL(info) << "This clients has gone:"
+                                        << client_list[client_ID]->name;
+                BOOST_LOG_TRIVIAL(info) << "Killing session with: "
+                                        << client_list[client_ID]->name;
+                client_list.erase(client_list.begin() + client_ID);
+                client_info_list.erase(client_info_list.begin() + client_ID);
+                return;
+            }
         }
     }
     void start(){

@@ -5,7 +5,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -14,7 +14,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -23,7 +23,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -32,7 +32,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -41,7 +41,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -50,7 +50,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -59,7 +59,7 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
 CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1144 (message):
@@ -68,19 +68,9 @@ CMake Warning at /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/sha
 Call Stack (most recent call first):
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1266 (_Boost_COMPONENT_DEPENDENCIES)
   /home/kirill/Documents/Clion/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/FindBoost.cmake:1904 (_Boost_MISSING_DEPENDENCIES)
-  CMakeLists.txt:19 (find_package)
+  CMakeLists.txt:20 (find_package)
 
 
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
--- Found Boost: /home/kirill/Documents/boost/installed/include (found suitable version "1.72.0", minimum required is "1.72.0") found components:  thread log log_setup chrono date_time atomic filesystem regex 
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/kirill/Documents/4_semestr/-lab-07-asio-server-/cmake-build-debug
