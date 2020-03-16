@@ -85,6 +85,8 @@ public:
         while (true){
             std::this_thread::__sleep_for(std::chrono::seconds{1},
                                           std::chrono::nanoseconds{0});
+	    if (!client_list.size()) 
+		continue;
             for (uint32_t i = 0; i < client_list.size(); ++i){
                 uint32_t time = clock();
                 uint32_t t = (time -
@@ -157,6 +159,8 @@ public:
         log_init();
         ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
         ip::tcp::acceptor acc(service, ep);
+
+	Threads.push_back(boost::thread(boost::bind(&MyServer::kicker, this)));
         while (true)
         {
             auto client = std::make_shared<talk_to_client>(service);
