@@ -85,9 +85,11 @@ public:
         while (true){
             std::this_thread::__sleep_for(std::chrono::seconds{1},
                                           std::chrono::nanoseconds{0});
-	    if (!client_list.size()) 
-		continue;
-            for (uint32_t i = 0; i < client_list.size(); ++i){
+            //std::mutex back_door;
+
+	        if (!client_list.size())
+		     continue;
+	        for (uint32_t i = 0; i < client_list.size(); ++i){
                 uint32_t time = clock();
                 uint32_t t = (time -
                         client_info_list[i].time_last_ping) / CLOCKS_PER_SEC;
@@ -97,7 +99,7 @@ public:
             }
         }
     }
-    void client_session(uint32_t client_ID)
+    void who_is_there(uint32_t client_ID)
     {
         std::mutex door;
         door.lock();
@@ -124,27 +126,30 @@ public:
                 if (len > 0) {
                     if (client_list[client_ID]->name == std::string("")) {
                         client_list[client_ID]->name = data;
-                        std::string answer = "login_ok" + '\n';
+                        std::string answer = std::string("login_ok");
+                        answer += '\n';
                         sock->write_some(buffer(answer));
                         BOOST_LOG_TRIVIAL(info) << "Client: "
                                                 << client_list[client_ID]->name
                                                 << " successfully logged in!";
                     } else if (read_msg.find("clients") != std::string::npos) {
-                        BOOST_LOG_TRIVIAL(info) << "Client: '"
+                        BOOST_LOG_TRIVIAL(info) << "Client: "
                                                 << client_list[client_ID]->name
-                                                << "' requested clients list.";
+                                                << " requested clients list.";
                         send_clients_list(sock);
                         client_info_list[client_ID].client_list_changed = false;
                         client_info_list[client_ID].time_last_ping = clock();
                     } else if (read_msg.find("ping") != std::string::npos) {
                         if (client_info_list[client_ID].client_list_changed) {
-                            std::string answer = "client_list_changed" + '\n';
+                            std::string answer = std::string("client_list_changed");
+                            answer += '\n';
                             sock->write_some(buffer(answer));
                             BOOST_LOG_TRIVIAL(info) << "Client:"
                                                     << client_list[client_ID]->name
                                                     << "pinged and client list was changed";
                         } else {
-                            std::string answer = "ping_ok" + '\n';
+                            std::string answer = std::string("ping_ok");
+                            answer += '\n';
                             sock->write_some(buffer(answer));
                             BOOST_LOG_TRIVIAL(info) << "Client: "
                                                     << client_list[client_ID]->name
@@ -158,7 +163,7 @@ public:
         catch(exception &e){
             BOOST_LOG_TRIVIAL(info) << e.what();
             if (e.what() == std::string("read_some: End of file")){
-                BOOST_LOG_TRIVIAL(info) << "This clients has gone:"
+                BOOST_LOG_TRIVIAL(info) << "This client has gone:"
                                         << client_list[client_ID]->name;
                 BOOST_LOG_TRIVIAL(info) << "Killing session with: "
                                         << client_list[client_ID]->name;
@@ -191,7 +196,7 @@ public:
                 //S P E C I A L  F O R  D I M O N!)
                 client_info_list[i].client_list_changed = true;
             }
-            Threads.push_back(boost::thread(boost::bind(&MyServer::client_session, this,
+            Threads.push_back(boost::thread(boost::bind(&MyServer::who_is_there, this,
                                                      client_list.size() - 1)));
             mutex.unlock();
         }
