@@ -94,11 +94,10 @@ public:
 	        if (!client_list.size())
 		     continue;
 	        for (uint32_t i = 0; i < client_list.size(); ++i){
-                uint32_t time = clock();
-                uint32_t t = (time -
-                        client_info_list[i].time_last_ping) / CLOCKS_PER_SEC;
-                BOOST_LOG_TRIVIAL(info) << "difference = "
-                                        << t;
+                uint32_t tme = time(NULL);
+                uint32_t t = (tme -
+                        client_info_list[i].time_last_ping);
+                BOOST_LOG_TRIVIAL(info) << "Debug info: difference in ping = " << t;
                 if (t > 5){
                     client_info_list[i].suicide = true;
                     BOOST_LOG_TRIVIAL(info) << "it must die";
@@ -118,7 +117,6 @@ public:
                 char data[512];
                 size_t len = sock->read_some(buffer(data));
 
-                BOOST_LOG_TRIVIAL(info) << "it must die = " << client_info_list[client_ID].suicide;
                 if (client_info_list[client_ID].suicide){
                     BOOST_LOG_TRIVIAL(info) << "Killing session with: "
                                             << client_list[client_ID]->name;
@@ -147,7 +145,7 @@ public:
                         //                        << " requested clients list.";
                         send_clients_list(sock);
                         client_info_list[client_ID].client_list_changed = false;
-                        client_info_list[client_ID].time_last_ping = clock();
+                        client_info_list[client_ID].time_last_ping = time(NULL);
                     } else if (read_msg.find("ping") != std::string::npos) {
                         if (client_info_list[client_ID].client_list_changed) {
                             std::string answer = std::string("client_list_changed");
@@ -164,7 +162,8 @@ public:
 //                                                    << client_list[client_ID]->name
 //                                                    << "successfully pinged.";
                         }
-                        client_info_list[client_ID].time_last_ping = clock();
+                        client_info_list[client_ID].time_last_ping = time(NULL);
+                        BOOST_LOG_TRIVIAL(info) << "Pinged at:" << client_info_list[client_ID].time_last_ping;
                     }
                 }
             }
@@ -197,7 +196,7 @@ public:
 
             client_info new_client;
             new_client.client_list_changed = false;
-            new_client.time_last_ping = clock();
+            new_client.time_last_ping = time(NULL);
             new_client.suicide = false;
             client_info_list.push_back(new_client);
 
