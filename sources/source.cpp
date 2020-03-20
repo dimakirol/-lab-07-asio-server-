@@ -75,9 +75,13 @@ public:
     }
     void send_clients_list(socket_ptr sock){
         std::string clients_names;
+
+        std::mutex back_door;
+        back_door.lock();
         for (uint32_t i = 0; i < client_list.size(); ++i){
             clients_names += client_list[i]->name + std::string(" ");
         }
+        back_door.unlock();
         clients_names += '\n';
         sock->write_some(buffer(clients_names));
     }
@@ -85,18 +89,22 @@ public:
         while (true){
             std::this_thread::__sleep_for(std::chrono::seconds{1},
                                           std::chrono::nanoseconds{0});
-            //std::mutex back_door;
-
+            std::mutex back_door;
+            back_door.lock();
 	        if (!client_list.size())
 		     continue;
 	        for (uint32_t i = 0; i < client_list.size(); ++i){
                 uint32_t time = clock();
                 uint32_t t = (time -
                         client_info_list[i].time_last_ping) / CLOCKS_PER_SEC;
+                BOOST_LOG_TRIVIAL(info) << "difference = "
+                                        << t;
                 if (t > 5){
                     client_info_list[i].suicide = true;
+                    BOOST_LOG_TRIVIAL(info) << "it must die";
                 }
             }
+            back_door.unlock();
         }
     }
     void who_is_there(uint32_t client_ID)
@@ -110,6 +118,7 @@ public:
                 char data[512];
                 size_t len = sock->read_some(buffer(data));
 
+                BOOST_LOG_TRIVIAL(info) << "it must die = " << client_info_list[client_ID].suicide;
                 if (client_info_list[client_ID].suicide){
                     BOOST_LOG_TRIVIAL(info) << "Killing session with: "
                                             << client_list[client_ID]->name;
@@ -129,13 +138,13 @@ public:
                         std::string answer = std::string("login_ok");
                         answer += '\n';
                         sock->write_some(buffer(answer));
-                        BOOST_LOG_TRIVIAL(info) << "Client: "
-                                                << client_list[client_ID]->name
-                                                << " successfully logged in!";
+                        //BOOST_LOG_TRIVIAL(info) << "Client: "
+                        //                        << client_list[client_ID]->name
+                        //                        << " successfully logged in!";
                     } else if (read_msg.find("clients") != std::string::npos) {
-                        BOOST_LOG_TRIVIAL(info) << "Client: "
-                                                << client_list[client_ID]->name
-                                                << " requested clients list.";
+                        //BOOST_LOG_TRIVIAL(info) << "Client: "
+                        //                        << client_list[client_ID]->name
+                        //                        << " requested clients list.";
                         send_clients_list(sock);
                         client_info_list[client_ID].client_list_changed = false;
                         client_info_list[client_ID].time_last_ping = clock();
@@ -144,16 +153,16 @@ public:
                             std::string answer = std::string("client_list_changed");
                             answer += '\n';
                             sock->write_some(buffer(answer));
-                            BOOST_LOG_TRIVIAL(info) << "Client:"
-                                                    << client_list[client_ID]->name
-                                                    << "pinged and client list was changed";
+//                        BOOST_LOG_TRIVIAL(info) << "Client:"
+//                                                << client_list[client_ID]->name
+//                                                << "pinged and client list was changed";
                         } else {
                             std::string answer = std::string("ping_ok");
                             answer += '\n';
                             sock->write_some(buffer(answer));
-                            BOOST_LOG_TRIVIAL(info) << "Client: "
-                                                    << client_list[client_ID]->name
-                                                    << "successfully pinged.";
+//                            BOOST_LOG_TRIVIAL(info) << "Client: "
+//                                                    << client_list[client_ID]->name
+//                                                    << "successfully pinged.";
                         }
                         client_info_list[client_ID].time_last_ping = clock();
                     }
