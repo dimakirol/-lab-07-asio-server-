@@ -289,7 +289,7 @@ public:
             }
             mutex_for_client_info_list.unlock();
 
-            while (!mutex_for_thread_list.try_lock())
+             while (!mutex_for_thread_list.try_lock())
                 std::this_thread::sleep_for(std::chrono::milliseconds(rand()%3+1));
             Threads.push_back(boost::thread(boost::bind(&MyServer::who_is_there, this,
                                                      client_list.size() - 1)));
