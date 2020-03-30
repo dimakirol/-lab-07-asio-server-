@@ -82,8 +82,8 @@ public:
     }
     void kicker(){
         while (true){
-            std::this_thread::__sleep_for(std::chrono::seconds{1},
-                                          std::chrono::nanoseconds{0});
+            std::this_thread::__sleep_for(std::chrono::seconds{0},
+              std::chrono::nanoseconds{rand() % base_time + additional_time});
 
 	        if (!client_list.size())
                 continue;
@@ -93,7 +93,6 @@ public:
                 uint32_t current_time = time(NULL);
                 uint32_t difference = (current_time -
                         client_info_list[i].time_last_ping);
-                BOOST_LOG_TRIVIAL(debug) << "Debug info: difference in ping = " << difference;
                 if (difference > critical_time){
                     client_info_list[i].suicide = true;
                     BOOST_LOG_TRIVIAL(info) << "it must die";
@@ -105,7 +104,8 @@ public:
         std::string clients_names;
 
         while (!mutex_for_client_list.try_lock())
-            std::this_thread::sleep_for(std::chrono::milliseconds(rand()%3+1));
+            std::this_thread::sleep_for(
+                    std::chrono::milliseconds(rand()%3+1));
 
         for (uint32_t i = 0; i < client_list.size(); ++i){
             clients_names += client_list[i]->name + std::string(" ");
@@ -118,11 +118,13 @@ public:
     }
     void who_is_there(uint32_t client_ID)
     {
-        std::this_thread::__sleep_for(std::chrono::seconds{0},
-                std::chrono::nanoseconds{rand() % base_time + additional_time});
         socket_ptr sock = client_list[client_ID]->sock();
         try {
             while (true) {
+                std::this_thread::__sleep_for(std::chrono::seconds{0},
+                    std::chrono::nanoseconds{
+                    rand() % base_time + additional_time});
+
                 char data[buf_size];
                 size_t len = sock->read_some(buffer(data));
 
@@ -138,7 +140,6 @@ public:
                 if (len > 0) {
                     if (read_msg.find('\n') != std::string::npos) {
                         read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
-                        BOOST_LOG_TRIVIAL(debug) << "Received message:" << read_msg;
                     }
                     else
                         throw std::logic_error("Received wrong message");
@@ -176,11 +177,10 @@ public:
                                                 << "successfully pinged.";
                     }
                     client_info_list[client_ID].time_last_ping = time(NULL);
-                    BOOST_LOG_TRIVIAL(debug) << "Pinged at:"
-                        << client_info_list[client_ID].time_last_ping;
                 }
                 else {
-                    throw std::logic_error("Received wrong message: " + read_msg);
+                    throw std::logic_error("Received wrong message: "
+                                           + read_msg);
                 }
             }
         } catch (std::logic_error const& e){
@@ -202,14 +202,16 @@ public:
         ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
         ip::tcp::acceptor acc(service, ep);
 
-	    Threads.push_back(boost::thread(boost::bind(&MyServer::kicker, this)));
+	    Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
+	            this)));
         while (true)
         {
             auto client = std::make_shared<talk_to_client>(service);
             acc.accept(*(client->sock()));
 
             while (!mutex_for_client_list.try_lock())
-                std::this_thread::sleep_for(std::chrono::milliseconds(rand()%3+1));
+                std::this_thread::sleep_for(
+                        std::chrono::milliseconds(rand()%3+1));
             client_list.push_back(client);
             mutex_for_client_list.unlock();
 
@@ -223,8 +225,9 @@ public:
                 client_info_list[i].client_list_changed = true;
             }
 
-            Threads.push_back(boost::thread(boost::bind(&MyServer::who_is_there, this,
-                                                     client_list.size() - 1)));
+            Threads.push_back(boost::thread(
+                    boost::bind(&MyServer::who_is_there, this,
+                                                    client_list.size() - 1)));
         }
     }
 

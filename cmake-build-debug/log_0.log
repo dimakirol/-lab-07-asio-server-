@@ -1,158 +1,227 @@
-[2020-03-23 16:44:49.640542] [info] New message: kirill
-[2020-03-23 16:44:49.640758] [info] Client: kirill
+[2020-03-30 19:35:56.920878] [info] Client: kirill
  successfully logged in!
-[2020-03-23 16:44:49.640845] [info] New message: clients
-[2020-03-23 16:44:49.640868] [info] Client: kirill
- requested clients list.
-[2020-03-23 16:44:50.234908] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:50.641166] [info] New message: ping
-[2020-03-23 16:44:50.641240] [info] Client: kirill
-successfully pinged.
-[2020-03-23 16:44:50.641263] [info] Pinged at:1584971090
-[2020-03-23 16:44:51.235309] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:51.642268] [info] New message: ping
-[2020-03-23 16:44:51.642333] [info] Client: kirill
-successfully pinged.
-[2020-03-23 16:44:51.642367] [info] Pinged at:1584971091
-[2020-03-23 16:44:52.236106] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:52.642615] [info] New message: ping
-[2020-03-23 16:44:52.642694] [info] Client: kirill
-successfully pinged.
-[2020-03-23 16:44:52.642721] [info] Pinged at:1584971092
-[2020-03-23 16:44:53.237002] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:53.550298] [info] New message: oleg
-[2020-03-23 16:44:53.550439] [info] Client: oleg
+[2020-03-30 19:35:56.926840] [info] Client: yarik
  successfully logged in!
-[2020-03-23 16:44:53.550619] [info] New message: clients
-[2020-03-23 16:44:53.550639] [info] Client: oleg
- requested clients list.
-[2020-03-23 16:44:53.642982] [info] New message: ping
-[2020-03-23 16:44:53.643061] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:53.643084] [info] Pinged at:1584971093
-[2020-03-23 16:44:54.237245] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:54.237315] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:54.552117] [info] New message: ping
-[2020-03-23 16:44:54.552197] [info] Client: oleg
-successfully pinged.
-[2020-03-23 16:44:54.552212] [info] Pinged at:1584971094
-[2020-03-23 16:44:54.643991] [info] New message: ping
-[2020-03-23 16:44:54.644065] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:54.644088] [info] Pinged at:1584971094
-[2020-03-23 16:44:55.237658] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:55.237726] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:55.552907] [info] New message: ping
-[2020-03-23 16:44:55.552975] [info] Client: oleg
-successfully pinged.
-[2020-03-23 16:44:55.552989] [info] Pinged at:1584971095
-[2020-03-23 16:44:55.644581] [info] New message: ping
-[2020-03-23 16:44:55.644654] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:55.644696] [info] Pinged at:1584971095
-[2020-03-23 16:44:56.238513] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:56.238596] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:56.553783] [info] New message: ping
-[2020-03-23 16:44:56.553860] [info] Client: oleg
-successfully pinged.
-[2020-03-23 16:44:56.553881] [info] Pinged at:1584971096
-[2020-03-23 16:44:56.645522] [info] New message: ping
-[2020-03-23 16:44:56.645618] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:56.645704] [info] Pinged at:1584971096
-[2020-03-23 16:44:56.691150] [info] New message: dima
-[2020-03-23 16:44:56.691307] [info] Client: dima
+[2020-03-30 19:35:56.927761] [info] Client: serega
  successfully logged in!
-[2020-03-23 16:44:56.691430] [info] New message: clients
-[2020-03-23 16:44:56.691450] [info] Client: dima
+[2020-03-30 19:35:56.945375] [info] Client: danya
+ successfully logged in!
+[2020-03-30 19:35:56.958370] [info] Client: zheka
+ successfully logged in!
+[2020-03-30 19:35:56.961278] [info] Client: oleg
+ successfully logged in!
+[2020-03-30 19:35:56.963250] [info] Client: dima
+ successfully logged in!
+[2020-03-30 19:35:56.986207] [info] Client: masha
+ successfully logged in!
+[2020-03-30 19:35:56.988278] [info] Client: kikita
+ successfully logged in!
+[2020-03-30 19:35:57.002294] [info] Client: dasha
+ successfully logged in!
+[2020-03-30 19:35:57.248977] [info] Client: kirill
  requested clients list.
-[2020-03-23 16:44:57.238787] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:57.238858] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:57.238870] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:57.554898] [info] New message: ping
-[2020-03-23 16:44:57.554994] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:44:57.555028] [info] Pinged at:1584971097
-[2020-03-23 16:44:57.646605] [info] New message: ping
-[2020-03-23 16:44:57.646686] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:57.646704] [info] Pinged at:1584971097
-[2020-03-23 16:44:57.692581] [info] New message: ping
-[2020-03-23 16:44:57.692664] [info] Client: dima
+[2020-03-30 19:35:57.263944] [info] Client: yarik
+ requested clients list.
+[2020-03-30 19:35:57.288839] [info] Client: masha
+ requested clients list.
+[2020-03-30 19:35:57.289833] [info] Client: serega
+ requested clients list.
+[2020-03-30 19:35:57.290814] [info] Client: kikita
+ requested clients list.
+[2020-03-30 19:35:57.292951] [info] Client: zheka
+ requested clients list.
+[2020-03-30 19:35:57.306842] [info] Client: oleg
+ requested clients list.
+[2020-03-30 19:35:57.318760] [info] Client: dasha
+ requested clients list.
+[2020-03-30 19:35:57.324771] [info] Client: danya
+ requested clients list.
+[2020-03-30 19:35:57.332756] [info] Client: dima
+ requested clients list.
+[2020-03-30 19:35:58.250093] [info] Client: kirill
 successfully pinged.
-[2020-03-23 16:44:57.692678] [info] Pinged at:1584971097
-[2020-03-23 16:44:58.239952] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:58.240035] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:58.240049] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:58.556156] [info] New message: ping
-[2020-03-23 16:44:58.556236] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:44:58.556259] [info] Pinged at:1584971098
-[2020-03-23 16:44:58.648040] [info] New message: ping
-[2020-03-23 16:44:58.648130] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:58.648163] [info] Pinged at:1584971098
-[2020-03-23 16:44:58.694067] [info] New message: ping
-[2020-03-23 16:44:58.694261] [info] Client: dima
+[2020-03-30 19:35:58.265044] [info] Client: yarik
 successfully pinged.
-[2020-03-23 16:44:58.694288] [info] Pinged at:1584971098
-[2020-03-23 16:44:59.240249] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:59.240330] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:59.240343] [info] Debug info: difference in ping = 1
-[2020-03-23 16:44:59.557437] [info] New message: ping
-[2020-03-23 16:44:59.557522] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:44:59.557544] [info] Pinged at:1584971099
-[2020-03-23 16:44:59.648371] [info] New message: ping
-[2020-03-23 16:44:59.648457] [info] Client:kirill
-pinged and client list was changed
-[2020-03-23 16:44:59.648479] [info] Pinged at:1584971099
-[2020-03-23 16:44:59.695138] [info] New message: ping
-[2020-03-23 16:44:59.695229] [info] Client: dima
+[2020-03-30 19:35:58.290172] [info] Client: serega
 successfully pinged.
-[2020-03-23 16:44:59.695243] [info] Pinged at:1584971099
-[2020-03-23 16:45:00.240970] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:00.241049] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:00.241078] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:00.557818] [info] New message: ping
-[2020-03-23 16:45:00.557898] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:45:00.557927] [info] Pinged at:1584971100
-[2020-03-23 16:45:00.696091] [info] New message: ping
-[2020-03-23 16:45:00.696173] [info] Client: dima
+[2020-03-30 19:35:58.290172] [info] Client: masha
 successfully pinged.
-[2020-03-23 16:45:00.696224] [info] Pinged at:1584971100
-[2020-03-23 16:45:01.241600] [info] Debug info: difference in ping = 2
-[2020-03-23 16:45:01.241669] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:01.241697] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:01.558880] [info] New message: ping
-[2020-03-23 16:45:01.558976] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:45:01.558991] [info] Pinged at:1584971101
-[2020-03-23 16:45:01.696393] [info] New message: ping
-[2020-03-23 16:45:01.696469] [info] Client: dima
+[2020-03-30 19:35:58.291996] [info] Client: kikita
 successfully pinged.
-[2020-03-23 16:45:01.696503] [info] Pinged at:1584971101
-[2020-03-23 16:45:02.242133] [info] Debug info: difference in ping = 3
-[2020-03-23 16:45:02.242210] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:02.242241] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:02.559368] [info] New message: ping
-[2020-03-23 16:45:02.559433] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:45:02.559447] [info] Pinged at:1584971102
-[2020-03-23 16:45:02.696930] [info] New message: ping
-[2020-03-23 16:45:02.697003] [info] Client: dima
+[2020-03-30 19:35:58.293973] [info] Client: zheka
 successfully pinged.
-[2020-03-23 16:45:02.697024] [info] Pinged at:1584971102
-[2020-03-23 16:45:03.242406] [info] Debug info: difference in ping = 4
-[2020-03-23 16:45:03.242497] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:03.242510] [info] Debug info: difference in ping = 1
-[2020-03-23 16:45:03.559686] [info] New message: ping
-[2020-03-23 16:45:03.559755] [info] Client:oleg
-pinged and client list was changed
-[2020-03-23 16:45:03.559786] [info] Pinged at:1584971103
-[2020-03-23 16:45:03.697293] [info] New message: ping
-[2020-03-23 16:45:03.697369] [info] Client: dima
+[2020-03-30 19:35:58.307298] [info] Client: oleg
 successfully pinged.
-[2020-03-23 16:45:03.697389] [info] Pinged at:1584971103
-[2020-03-23 16:45:04.242965] [info] Debug info: difference in ping = 5
+[2020-03-30 19:35:58.320033] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:35:58.325209] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:35:58.333884] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:35:59.250597] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:35:59.265514] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:35:59.290521] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:35:59.290521] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:35:59.292493] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:35:59.294421] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:35:59.308523] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:35:59.320406] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:35:59.326434] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:35:59.334378] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:00.251059] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:00.266002] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:00.290974] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:00.290974] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:00.293059] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:00.295033] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:00.308926] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:00.320926] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:00.326842] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:00.334789] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:01.251704] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:01.266587] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:01.291615] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:01.291615] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:01.293553] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:01.295544] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:01.309827] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:01.321589] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:01.327557] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:01.335433] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:02.252741] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:02.267699] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:02.292744] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:02.292744] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:02.294664] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:02.296600] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:02.310689] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:02.322713] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:02.328555] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:02.336491] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:03.253120] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:03.268078] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:03.293062] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:03.293062] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:03.294927] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:03.296968] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:03.311972] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:03.323943] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:03.328889] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:03.336870] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:04.253561] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:04.268458] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:04.293471] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:04.293471] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:04.295409] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:04.297401] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:04.312520] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:04.324500] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:04.329355] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:04.337269] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:05.253988] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:05.268966] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:05.293864] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:05.293937] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:05.295937] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:05.297861] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:05.312961] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:05.324849] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:05.329740] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:05.337751] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:06.254910] [info] Client: kirill
+successfully pinged.
+[2020-03-30 19:36:06.269859] [info] Client: yarik
+successfully pinged.
+[2020-03-30 19:36:06.294806] [info] Client: serega
+successfully pinged.
+[2020-03-30 19:36:06.294868] [info] Client: masha
+successfully pinged.
+[2020-03-30 19:36:06.296766] [info] Client: kikita
+successfully pinged.
+[2020-03-30 19:36:06.298701] [info] Client: zheka
+successfully pinged.
+[2020-03-30 19:36:06.313859] [info] Client: oleg
+successfully pinged.
+[2020-03-30 19:36:06.325828] [info] Client: dasha
+successfully pinged.
+[2020-03-30 19:36:06.330699] [info] Client: danya
+successfully pinged.
+[2020-03-30 19:36:06.338645] [info] Client: dima
+successfully pinged.
+[2020-03-30 19:36:12.150044] [info] it must die
+[2020-03-30 19:36:12.150128] [info] it must die
+[2020-03-30 19:36:12.150141] [info] it must die
+[2020-03-30 19:36:12.150149] [info] it must die
+[2020-03-30 19:36:12.150180] [info] it must die
+[2020-03-30 19:36:12.150206] [info] it must die
+[2020-03-30 19:36:12.150220] [info] it must die
