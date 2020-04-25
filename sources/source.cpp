@@ -4,8 +4,8 @@
 
 class  talk_to_client{
 public:
-    explicit talk_to_client(io_service &service){
-        socket = socket_ptr(new ip::tcp::socket(service));
+    explicit talk_to_client(assio::io_service &service){
+        socket = socket_ptr(new assio::ip::tcp::socket(service));
         name = std::string("");
     }
     socket_ptr sock(){return socket;}
@@ -175,7 +175,7 @@ public:
         }
     }
     void start(){
-        assio::ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
+        assio::ip::tcp::endpoint ep(assio::ip::tcp::v4(), Port); // listen on 2001
         assio::ip::tcp::acceptor acc(service, ep);
 
          Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
