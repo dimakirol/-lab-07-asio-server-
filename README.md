@@ -2,7 +2,7 @@
 [![Travis][build-badge]][build]
 
 [build-badge]: https://img.shields.io/travis/github/dimakirol/-lab-07-asio-server-/master.png?style=flat-square
-[build]: https://travis-ci.org/github/dimakirol/-lab-07-asio-server-
+[build]: https://travis-ci.com/github/dimakirol/-lab-07-asio-server-
 ## Задание
 
 Реализовать синхронный сервер с использованием [Boost.Asio](https://www.boost.org/doc/libs/1_68_0/doc/html/boost_asio.html). 
