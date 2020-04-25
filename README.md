@@ -1,7 +1,7 @@
 # Лабораторная работа №7
 [![Travis][build-badge]][build]
 
-[build-badge]: https://img.shields.io/travis/github/dimakirol/-lab-07-asio-server-/master.png?style=flat-square
+[build-badge]: https://travis-ci.com/dimakirol/-lab-07-asio-server-.svg?branch=master
 [build]: https://travis-ci.com/github/dimakirol/-lab-07-asio-server-
 ## Задание
 
