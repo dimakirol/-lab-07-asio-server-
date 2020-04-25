@@ -41,6 +41,9 @@ find_package(Boost 1.70.0 COMPONENTS REQUIRED thread log log_setup)
 add_library(7_lab STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
         )
+#add_executable(7_lab
+#        ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
+#        )
 add_executable(tests
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
         )
