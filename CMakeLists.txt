@@ -38,7 +38,7 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-hunter_add_package(Boost)
+hunter_add_package(Boost COMPONENTS thread log log_setup)
 find_package(Boost 1.70.0 COMPONENTS REQUIRED thread log log_setup)
 
 add_library(7_lab STATIC
@@ -57,7 +57,8 @@ target_include_directories(tests
         )
 
 #include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(tests GTest::main 7_lab ${Boost_LIBRARIES})
+target_link_libraries(tests GTest::main 7_lab)
+target_link_libraries(7_lab Boost::log Boost::thread Boost::log_setup)
 #link_directories("${Boost_Path}/installed/lib")
 
 enable_testing()
