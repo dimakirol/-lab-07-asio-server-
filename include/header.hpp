@@ -28,10 +28,10 @@ static const uint32_t critical_time = 5;
 static const uint32_t base_time = 100000000;
 static const uint32_t additional_time = 300000000;
 
-namespace boost::asio = asio;
+namespace assio = boost::asio;
 using std::exception;
 namespace logging = boost::log;
 
-typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
+typedef boost::shared_ptr<assio::ip::tcp::socket> socket_ptr;
 
 #endif // INCLUDE_HEADER_HPP_

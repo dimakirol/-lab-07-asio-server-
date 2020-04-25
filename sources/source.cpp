@@ -90,7 +90,7 @@ public:
         mutex_for_client_list.unlock();
 
         clients_names += '\n';
-        sock->write_some(buffer(clients_names));
+        sock->write_some(assio::buffer(clients_names));
     }
     void who_is_there(uint32_t client_ID)
     {
@@ -103,12 +103,12 @@ public:
                             rand_r(&now) % base_time + additional_time});
 
                 char data[512];
-                size_t len = sock->read_some(buffer(data));
+                size_t len = sock->read_some(assio::buffer(data));
 
                 if (client_info_list[client_ID].suicide){
                     BOOST_LOG_TRIVIAL(warning) << "Killing session with: "
                                             << client_list[client_ID]->name;
-                    sock->write_some(buffer("too_late\n"));
+                    sock->write_some(assio::buffer("too_late\n"));
                     return;
                 }
 
@@ -127,7 +127,7 @@ public:
                 if (client_list[client_ID]->name == std::string("")) {
                     client_list[client_ID]->name = data;
 
-                    sock->write_some(buffer("login_ok\n"));
+                    sock->write_some(assio::buffer("login_ok\n"));
 
                     BOOST_LOG_TRIVIAL(info) << "Client: "
                                             << client_list[client_ID]->name
@@ -143,12 +143,12 @@ public:
                     client_info_list[client_ID].time_last_ping = time(NULL);
                 } else if (read_msg == std::string("ping")) {
                     if (client_info_list[client_ID].client_list_changed) {
-                        sock->write_some(buffer("client_list_changed\n"));
+                        sock->write_some(assio::buffer("client_list_changed\n"));
                         BOOST_LOG_TRIVIAL(info) << "Client:"
                                             << client_list[client_ID]->name
                              << "pinged and client list was changed";
                     } else {
-                        sock->write_some(buffer("ping_ok\n"));
+                        sock->write_some(assio::buffer("ping_ok\n"));
                         BOOST_LOG_TRIVIAL(info) << "Client: "
                                                 << client_list[client_ID]->name
                                                 << "successfully pinged.";
@@ -174,8 +174,8 @@ public:
         }
     }
     void start(){
-        asio::ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
-        asio::ip::tcp::acceptor acc(service, ep);
+        assio::ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
+        assio::ip::tcp::acceptor acc(service, ep);
 
          Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
                  this)));
@@ -208,7 +208,7 @@ public:
     }
 
 private:
-    io_service service;
+    assio::io_service service;
     std::mutex mutex_for_client_list;
     std::vector<std::shared_ptr<talk_to_client>> client_list;
     std::vector<client_info> client_info_list;
