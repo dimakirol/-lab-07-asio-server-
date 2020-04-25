@@ -1,37 +1,6 @@
 // Copyright 2020 dimakirol <your_email>
 
-#include <ctime>
-#include <vector>
-#include <thread>
-#include <cstdint>
-#include <cstdlib>
-#include <iostream>
-#include <string>
-#include <mutex>
-#include <ctime>
-#include <boost/asio.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/expressions.hpp>
-#include <boost/log/utility/setup/file.hpp>
-#include <boost/log/utility/setup/common_attributes.hpp>
-#include <boost/log/utility/setup/console.hpp>
-#include <boost/log/sources/severity_logger.hpp>
-#include <boost/core/null_deleter.hpp>
-#include <boost/log/expressions/keyword.hpp>
-#define buf_size 512
-
-static const uint32_t SIZE_FILE = 10*1024*1024;
-static const uint32_t Port = 2001;
-static const uint32_t critical_time = 5;
-static const uint32_t base_time = 100000000;
-static const uint32_t additional_time = 300000000;
-
-namespace boost::asio = asio;
-using std::exception;
-namespace logging = boost::log;
-
-typedef boost::shared_ptr<ip::tcp::socket> socket_ptr;
+#include <header.hpp>
 
 class  talk_to_client{
 public:
@@ -92,8 +61,9 @@ public:
                 continue;
             }
             for (uint32_t i = 0; i < client_list.size(); ++i){
-	            if (client_info_list[i].suicide)
-	                continue;
+                if (client_info_list[i].suicide) {
+                    continue;
+                }
                 uint32_t current_time = time(NULL);
                 uint32_t difference = (current_time -
                         client_info_list[i].time_last_ping);
@@ -132,7 +102,7 @@ public:
                     std::chrono::nanoseconds{
                             rand_r(&now) % base_time + additional_time});
 
-                char data[buf_size];
+                char data[512];
                 size_t len = sock->read_some(buffer(data));
 
                 if (client_info_list[client_ID].suicide){
@@ -207,8 +177,8 @@ public:
         asio::ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
         asio::ip::tcp::acceptor acc(service, ep);
 
-	    Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
-	            this)));
+         Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
+                 this)));
         while (true){
             auto client = std::make_shared<talk_to_client>(service);
             acc.accept(*(client->sock()));
