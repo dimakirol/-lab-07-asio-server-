@@ -143,7 +143,8 @@ public:
                     client_info_list[client_ID].time_last_ping = time(NULL);
                 } else if (read_msg == std::string("ping")) {
                     if (client_info_list[client_ID].client_list_changed) {
-                        sock->write_some(assio::buffer("client_list_changed\n"));
+                        sock->write_some(assio::buffer(
+                                "client_list_changed\n"));
                         BOOST_LOG_TRIVIAL(info) << "Client:"
                                             << client_list[client_ID]->name
                              << "pinged and client list was changed";
