@@ -25,15 +25,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(7_lab)
 
 
-set(Boost_Path "/home/kirill/Documents/boost")
-set(Boost_INCLUDE_DIR "${Boost_Path}/installed/include")
-string(APPEND CMAKE_CXX_FLAGS " -g -Wall -DBOOST_LOG_DYN_LINK")
-set(D_LIBRARY_PATH="/home/kirill/Documents//boost/installed/lib/")
-include_directories(include)
+#set(Boost_Path "/home/kirill/Documents/boost")
+#set(Boost_INCLUDE_DIR "${Boost_Path}/installed/include")
+#string(APPEND CMAKE_CXX_FLAGS " -g -Wall -DBOOST_LOG_DYN_LINK")
+#set(D_LIBRARY_PATH="/home/kirill/Documents//boost/installed/lib/")
+#include_directories(include)
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
+#find_package(Boost 1.72.0 COMPONENTS REQUIRED thread log log_setup)
+hunter_add_package(GTest)
+find_package(GTest CONFIG REQUIRED)
+
+hunter_add_package(Boost)
 find_package(Boost 1.72.0 COMPONENTS REQUIRED thread log log_setup)
 
 add_library(7_lab STATIC
@@ -51,9 +56,9 @@ target_include_directories(tests
         PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
         )
 
-include_directories(${Boost_INCLUDE_DIRS})
+#include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(tests GTest::main 7_lab ${Boost_LIBRARIES})
-link_directories("${Boost_Path}/installed/lib")
+#link_directories("${Boost_Path}/installed/lib")
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
