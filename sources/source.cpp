@@ -1,3 +1,5 @@
+// Copyright 2020 dimakirol <your_email>
+
 #include <ctime>
 #include <vector>
 #include <thread>
@@ -6,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <mutex>
+#include <ctime>
 #include <boost/asio.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/log/trivial.hpp>
@@ -16,15 +19,15 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/log/expressions/keyword.hpp>
+#define buf_size 512
 
 static const uint32_t SIZE_FILE = 10*1024*1024;
 static const uint32_t Port = 2001;
 static const uint32_t critical_time = 5;
 static const uint32_t base_time = 100000000;
 static const uint32_t additional_time = 300000000;
-static const uint32_t buf_size = 512;
 
-using namespace boost::asio;
+namespace boost::asio = asio;
 using std::exception;
 namespace logging = boost::log;
 
@@ -83,11 +86,12 @@ public:
     void kicker(){
         while (true){
             std::this_thread::__sleep_for(std::chrono::seconds{0},
-              std::chrono::nanoseconds{rand() % base_time + additional_time});
+            std::chrono::nanoseconds{rand() % base_time + additional_time});
 
-	        if (!client_list.size())
+            if (!client_list.size()) {
                 continue;
-	        for (uint32_t i = 0; i < client_list.size(); ++i){
+            }
+            for (uint32_t i = 0; i < client_list.size(); ++i){
 	            if (client_info_list[i].suicide)
 	                continue;
                 uint32_t current_time = time(NULL);
@@ -103,9 +107,11 @@ public:
     void send_clients_list(socket_ptr sock){
         std::string clients_names;
 
-        while (!mutex_for_client_list.try_lock())
+        while (!mutex_for_client_list.try_lock()) {
+            unsigned now = time(0);
             std::this_thread::sleep_for(
-                    std::chrono::milliseconds(rand()%3+1));
+                    std::chrono::milliseconds(rand_r(&now) % 3 + 1));
+        }
 
         for (uint32_t i = 0; i < client_list.size(); ++i){
             clients_names += client_list[i]->name + std::string(" ");
@@ -121,9 +127,10 @@ public:
         socket_ptr sock = client_list[client_ID]->sock();
         try {
             while (true) {
+                unsigned now = time(0);
                 std::this_thread::__sleep_for(std::chrono::seconds{0},
                     std::chrono::nanoseconds{
-                    rand() % base_time + additional_time});
+                            rand_r(&now) % base_time + additional_time});
 
                 char data[buf_size];
                 size_t len = sock->read_some(buffer(data));
@@ -140,12 +147,12 @@ public:
                 if (len > 0) {
                     if (read_msg.find('\n') != std::string::npos) {
                         read_msg.assign(read_msg, 0, read_msg.rfind('\n'));
-                    }
-                    else
+                    } else {
                         throw std::logic_error("Received wrong message");
-                }
-                else
+                    }
+                } else {
                     throw std::logic_error("Received empty message");
+                }
 
                 if (client_list[client_ID]->name == std::string("")) {
                     client_list[client_ID]->name = data;
@@ -169,7 +176,7 @@ public:
                         sock->write_some(buffer("client_list_changed\n"));
                         BOOST_LOG_TRIVIAL(info) << "Client:"
                                             << client_list[client_ID]->name
-                                            << "pinged and client list was changed";
+                             << "pinged and client list was changed";
                     } else {
                         sock->write_some(buffer("ping_ok\n"));
                         BOOST_LOG_TRIVIAL(info) << "Client: "
@@ -177,41 +184,40 @@ public:
                                                 << "successfully pinged.";
                     }
                     client_info_list[client_ID].time_last_ping = time(NULL);
-                }
-                else {
+                } else {
                     throw std::logic_error("Received wrong message: "
                                            + read_msg);
                 }
             }
         } catch (std::logic_error const& e){
             BOOST_LOG_TRIVIAL(warning) << "Received strange message";
-        } catch(std::exception &e){
+        } catch (std::exception &e){
             if (e.what() == std::string("read_some: End of file")){
                 BOOST_LOG_TRIVIAL(warning) << "This client has gone:"
                                         << client_list[client_ID]->name;
                 BOOST_LOG_TRIVIAL(warning) << "Killing session with: "
                                         << client_list[client_ID]->name;
                 return;
-            }
-            else{
+            } else {
                 BOOST_LOG_TRIVIAL(warning) << e.what();
             }
         }
     }
     void start(){
-        ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
-        ip::tcp::acceptor acc(service, ep);
+        asio::ip::tcp::endpoint ep(ip::tcp::v4(), Port); // listen on 2001
+        asio::ip::tcp::acceptor acc(service, ep);
 
 	    Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
 	            this)));
-        while (true)
-        {
+        while (true){
             auto client = std::make_shared<talk_to_client>(service);
             acc.accept(*(client->sock()));
 
-            while (!mutex_for_client_list.try_lock())
+            while (!mutex_for_client_list.try_lock()) {
+                unsigned now = time(0);
                 std::this_thread::sleep_for(
-                        std::chrono::milliseconds(rand()%3+1));
+                        std::chrono::milliseconds(rand_r(&now) % 3 + 1));
+            }
             client_list.push_back(client);
             mutex_for_client_list.unlock();
 
