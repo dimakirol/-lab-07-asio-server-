@@ -175,7 +175,8 @@ public:
         }
     }
     void start(){
-        assio::ip::tcp::endpoint ep(assio::ip::tcp::v4(), Port); // listen on 2001
+        assio::ip::tcp::endpoint ep(assio::ip::tcp::v4(),
+                Port); // listen on 2001
         assio::ip::tcp::acceptor acc(service, ep);
 
          Threads.push_back(boost::thread(boost::bind(&MyServer::kicker,
