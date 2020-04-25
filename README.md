@@ -1,8 +1,8 @@
 # Лабораторная работа №7
 [![Travis][build-badge]][build]
 
-[build-badge]: https://img.shields.io/travis/dimakirol/-lab-07-asio-server-/master.png?style=flat-square
-[build]: https://travis-ci.org/dimakirol/-lab-07-asio-server-
+[build-badge]: https://img.shields.io/travis/github/dimakirol/-lab-07-asio-server-/master.png?style=flat-square
+[build]: https://travis-ci.org/github/dimakirol/-lab-07-asio-server-
 ## Задание
 
 Реализовать синхронный сервер с использованием [Boost.Asio](https://www.boost.org/doc/libs/1_68_0/doc/html/boost_asio.html). 
